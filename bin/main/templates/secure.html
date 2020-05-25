@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -15,11 +15,81 @@
    <div class="container">
    	
    	<div class="jumbotron">
+   	<h1>Check MSISDN</h1>
+   	
+   	
+   	
+  	<br><br>
+   	
+   	<div th:unless="${error==null}">
+        <table class="table">
+            <thead>
+            <tr>
+                <td>Status code</td>
+                <td>Error</td>
+            </tr>
+            </thead>
+
+            <tr>
+                <td><span th:text="${error.statusCode}"></span></td>
+                <td><span th:text="${error.body}"></span></td>
+            </tr>
+        </table>
+    </div>
+   	
    		
-   		<h1>Secure</h1>
+   		
+   		
+   <form class="form-inline" action="#" th:action="@{/api/}" th:formmethod="POST">
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="MSISDN" class="sr-only">MSISDN</label>
+    <input type="text" class="form-control" name="msisdn" id="msisdn"  />
+  </div>
+  <button type="submit" class="btn btn-primary mb-2">Check</button>
+  </form>
+   		
+
    		
    	</div>
    	
+   	
+       <div th:if="${error==null}">
+
+        <table class="table">
+
+            <thead>
+            <tr>
+            	<td>MSISDN</td>
+                <td>Name</td>
+                <td>Address</td>
+                <td>Country</td>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr th:each="subscriber: ${subscribers}">
+            	<td><span th:text="${subscriber.MSISDN}"></span></td>
+                <td><span th:text="${subscriber.name}"></span></td>
+                <td><span th:text="${subscriber.address}"></span></td>
+                <td><span th:text="${subscriber.conutry}"></span></td>
+
+
+            </tr>
+
+            </tbody>
+
+        </table>
+    </div>
+   
+   
+   
+   
+   
+   
+   
+   
+   
    
    </div>
 
