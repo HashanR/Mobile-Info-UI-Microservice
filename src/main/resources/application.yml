@@ -1,6 +1,9 @@
 server:
   port: 8090
-
+  servlet:
+    session:
+      cookie:
+        name: KSESSION
 security:
   oauth2:
     client:
@@ -8,3 +11,6 @@ security:
       client-secret: pin
       user-authorization-uri: http://localhost:9191/oauth/authorize
       access-token-uri: http://localhost:9191/oauth/token
+    resource:
+      token-info-uri: http://localhost:9191/oauth/check_token
+      
