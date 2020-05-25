@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.3.0.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
+	id "com.palantir.docker" version "0.25.0"
 }
 
 group = 'com.hashanr.microservices'
@@ -35,4 +36,13 @@ dependencyManagement {
 
 test {
 	useJUnitPlatform()
+}
+
+docker {
+	
+	name "${project.name}"
+	tag 'DockerHub', "hashanr/microservices:${project.version}"
+	dockerfile file('src/docker/Dockerfile')
+	copySpec.from(jar).rename(".*","app.jar")
+	buildArgs(['JAR_FILE': "app.jar"])
 }
