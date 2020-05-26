@@ -1,39 +1,27 @@
 package com.hashanr.microservices.ui.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 import com.hashanr.microservice.commons.model.SubscriberData;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import com.hashanr.microservices.ui.configuration.AccessToken;
+
 
 @Controller
 @EnableOAuth2Sso
@@ -55,6 +43,23 @@ public class UIController extends WebSecurityConfigurerAdapter {
 		.anyRequest()
 		.authenticated();
 	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpServletRequest request, HttpServletResponse response) {
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      if (auth != null){    
+	         new SecurityContextLogoutHandler().logout(request, response, auth);
+	      }
+	    SecurityContextHolder.getContext().setAuthentication(null);
+	    
+	    return "home";
+	    
+	    
+	}
+	
+	
+	
+	
 
 
 
