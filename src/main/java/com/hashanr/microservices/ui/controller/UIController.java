@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -12,9 +13,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpStatusCodeException;
@@ -27,6 +32,8 @@ import com.hashanr.microservices.ui.configuration.AccessToken;
 @EnableOAuth2Sso
 public class UIController extends WebSecurityConfigurerAdapter {
 
+
+	
 	
 	@Autowired
 	RestTemplate restTemplate;
@@ -44,6 +51,8 @@ public class UIController extends WebSecurityConfigurerAdapter {
 		.authenticated();
 	}
 	
+	
+	
 	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -56,8 +65,6 @@ public class UIController extends WebSecurityConfigurerAdapter {
 	    
 	    
 	}
-	
-	
 	
 	
 
