@@ -101,7 +101,7 @@ public class UIController extends WebSecurityConfigurerAdapter {
 		httpHeaders.add("Authorization", AccessToken.getAccessToken());
 		
 		
-		String url = "http://localhost:8080/api/v1/subscriber/"+msisdn;
+		String url = "http://mobile-info-backend:8080/api/v1/subscriber/"+msisdn;
 		try {
 		HttpEntity<SubscriberData> subscriberHttpEntity= new HttpEntity<>(httpHeaders);
 		
