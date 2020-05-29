@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'com.hashanr.microservices'
-version = '0.0.1-SNAPSHOT'
+//version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
@@ -45,7 +45,7 @@ test {
 docker {
 	
 	name "${project.name}"
-	tag 'DockerHub', "hashanr/microservices:${project.version}"
+	tag 'DockerHub', "hashanr/mobile-info-ui:${project.version}"
 	dockerfile file('src/docker/Dockerfile')
 	copySpec.from(jar).rename(".*","app.jar")
 	buildArgs(['JAR_FILE': "app.jar"])
@@ -54,7 +54,7 @@ docker {
 
 
 release {
-    failOnCommitNeeded = true
+    failOnCommitNeeded = false
     failOnPublishNeeded = true
     failOnSnapshotDependencies = true
     failOnUnversionedFiles = true
