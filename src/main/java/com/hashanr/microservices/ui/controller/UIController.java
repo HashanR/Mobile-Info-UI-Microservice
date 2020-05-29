@@ -17,6 +17,8 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -48,11 +50,15 @@ public class UIController extends WebSecurityConfigurerAdapter {
 		.antMatchers("/")
 		.permitAll()
 		.anyRequest()
-		.authenticated();
+		.authenticated()
+		.and()
+		.logout()
+		.logoutSuccessUrl("/")
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 	}
 	
 	
-	
+	/*
 	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -67,7 +73,7 @@ public class UIController extends WebSecurityConfigurerAdapter {
 	}
 	
 	
-
+*/
 
 
 	@RequestMapping(value="/")
