@@ -59,7 +59,7 @@
    <form class="form-inline" action="#" th:action="@{/api/}" th:formmethod="POST">
   <div class="form-group mx-sm-3 mb-2">
     <label for="MSISDN" class="sr-only">MSISDN</label>
-    <input type="text" class="form-control" name="msisdn" id="msisdn"  />
+    <input class="form-control" name="msisdn" id="msisdn" input type="text" pattern="\d*" maxlength="6" placeholder="Enter digits only" required>
   </div>
   <button type="submit" class="btn btn-primary mb-2">Check</button>
   </form>

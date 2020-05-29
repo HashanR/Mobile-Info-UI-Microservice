@@ -21,7 +21,7 @@ ext {
 
 dependencies {
 	//Import commons domain dependency
-	compile group: 'com.hashanr.microservices', name: 'Mobile-Info-Commons' , version: '2.0'
+	compile group: 'com.hashanr.microservices', name: 'Mobile-Info-Commons' , version: '4.0'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
