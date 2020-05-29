@@ -7,7 +7,7 @@ server:
 security:
   oauth2:
     client:
-      client-id: mobile
+      client-id: web
       client-secret: pin
       user-authorization-uri: http://${AUTH_SERVER}/oauth/authorize
       access-token-uri: http://${AUTH_SERVER}/oauth/token
