@@ -53,7 +53,7 @@ public class UIController extends WebSecurityConfigurerAdapter {
 		.authenticated()
 		.and()
 		.logout()
-		.logoutSuccessUrl("/")
+		.logoutSuccessUrl("http://34.72.11.24:30037/exit")
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 	}
 	
