@@ -2,6 +2,8 @@ package com.hashanr.microservices.ui.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
@@ -39,8 +41,12 @@ public class UIController extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	RestTemplate restTemplate;
-	
-	
+
+	@Value("${url.backend}")
+	private String urlBackend;
+
+	@Value("${url.auth}")
+	private String urlAuth;
 	
 	
 	@Override
@@ -53,7 +59,7 @@ public class UIController extends WebSecurityConfigurerAdapter {
 		.authenticated()
 		.and()
 		.logout()
-		.logoutSuccessUrl("http://34.72.11.24:30037/exit")
+		.logoutSuccessUrl("http://"+urlAuth+"/exit")
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 	}
 	
@@ -101,7 +107,7 @@ public class UIController extends WebSecurityConfigurerAdapter {
 		httpHeaders.add("Authorization", AccessToken.getAccessToken());
 		
 		
-		String url = "http://mobile-info-backend:8080/api/v1/subscriber/"+msisdn;
+		String url = "http://"+urlBackend+"/api/v1/subscriber/"+msisdn;
 		try {
 		HttpEntity<SubscriberData> subscriberHttpEntity= new HttpEntity<>(httpHeaders);
 		

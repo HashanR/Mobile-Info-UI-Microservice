@@ -13,4 +13,7 @@ security:
       access-token-uri: http://${AUTH_SERVER}/oauth/token
     resource:
       token-info-uri: http://${AUTH_SERVER}/oauth/check_token
-      
+
+url:
+  auth: ${AUTH_SERVER}
+  backend:  ${BACK_END}
