@@ -16,4 +16,4 @@ security:
 
 url:
   auth: ${AUTH_SERVER}
-  backend:  ${BACK_END}
+  backend: ${BACK_END}
